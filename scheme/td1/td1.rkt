@@ -74,7 +74,7 @@
 
 (define (slash operator l)
   (if (> 2 (length l))
-      (error "The list must contains at least 2 elements")
+      l ;We should define the return of the binairy operator with less than 2 elements (or throw an error)
       (let loop ((res (operator (car l) (car (cdr l))))
                  (list (cdr l)))
         (if (empty? (cdr list)) ;There's no element left
@@ -93,3 +93,34 @@
 (test (slash - '(10 2 3)) 5)
 (test (slash expt '(2 3 4)) 4096)
 (test (slash * (filter prime? (iota 100))) 2305567963945518424753102147331756070)
+
+;;;; Transformation de code
+
+(define-syntax or
+  (syntax-rules ()
+    ((or) #f)
+    ((or a b ...)
+        (let ((result a))
+            (if result
+                result
+                (or b ...))))
+    ))
+
+(define-syntax and 
+  (syntax-rules ()
+    ((and) #t)
+    ((and a) a)
+    ((and a b ...)
+       (if a
+           (and b ...)
+           #f))
+    ))
+
+(define-syntax while
+  (syntax-rules ()
+    ((while cond body ...) 
+       (if cond
+           body ... (while cond body ...)
+           (void))
+    ))
+        

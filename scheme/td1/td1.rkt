@@ -7,7 +7,7 @@
       (void)
       (error "Bad test result")))
 
-;;;; Echauffement
+;;;; Échauffement
 
 (define (next-odd n)
   (if (equal? 0 (modulo n 2))
@@ -34,9 +34,9 @@
         (cons (f min) (loop (+ min 1))))
     ))
 
-(define (iota n) (range n))
+(define iota range)
 
-;;;; Tests échauffement
+;;;; Tests Échauffement
 
 (test (+ 1 2) 3)
 (test (next-odd 1) 3)
@@ -60,3 +60,36 @@
 
 (define (trans l)
   (map (lambda (x) (revsymb x)) l))
+
+(define (display-all l)
+  (for-each (lambda (x) (display x) (newline)) l))
+
+(define (filter test l)
+  (if (empty? l)
+      '()
+      (let ((filtered (filter test (cdr l))))
+        (if (test (car l)) 
+            (cons (car l) filtered) 
+            filtered))))
+
+(define (slash operator l)
+  (if (> 2 (length l))
+      (error "The list must contains at least 2 elements")
+      (let loop ((res (operator (car l) (car (cdr l))))
+                 (list (cdr l)))
+        (if (empty? (cdr list)) ;There's no element left
+            res
+            (loop (operator res (car (cdr list))) (cdr list))))
+  ))
+
+;;;; Test Manipulation de données
+
+(test (revsymb 'foobar) 'raboof)
+(test (trans '(foo bar)) '(oof rab))
+(test (filter (lambda (x) (> x 3)) '(1 10 2 20)) '(10 20))
+(test (slash * '(10 20 30)) 6000)
+(test (slash string-append '("foo" "bar")) "foobar")
+(test (slash + '(1 2 3)) 6)
+(test (slash - '(10 2 3)) 5)
+(test (slash expt '(2 3 4)) 4096)
+(test (slash * (filter prime? (iota 100))) 2305567963945518424753102147331756070)

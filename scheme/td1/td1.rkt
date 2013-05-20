@@ -119,8 +119,14 @@
 (define-syntax while
   (syntax-rules ()
     ((while cond body ...) 
-       (if cond
-           body ... (while cond body ...)
-           (void))
-    ))
-        
+       (let loop ()
+         (if cond
+             (begin body ... (loop))
+             (void))
+         ))))
+       
+;;;; Test while
+
+ (test (let ((i 0) (c 0)) (while (< i 5) (set! c (+ c i)) (set! i (+ i 1))) c) 10)
+ 
+ 

@@ -128,4 +128,14 @@
 
  (test (let ((i 0) (c 0)) (while (< i 5) (set! c (+ c i)) (set! i (+ i 1))) c) 10)
  
+ (define-syntax define-trace
+   (syntax-rules ()
+     ((define-trace (f . args) body ...)
+      (define (f . args)
+        (begin (display f) (newline) body ...)
+        ; I think that it's not possible to print another time after after returning the value of body
+        )
+      )))
  
+ (define-trace (testa x y) (* x y))
+ (testa 3 4)

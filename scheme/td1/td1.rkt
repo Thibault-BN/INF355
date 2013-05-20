@@ -132,10 +132,8 @@
    (syntax-rules ()
      ((define-trace (f . args) body ...)
       (define (f . args)
-        (begin (display f) (newline) body ...)
+        (begin (display f) (newline) (begin0 body ... (flush-output) (newline)))
         ; I think that it's not possible to print another time after after returning the value of body
         )
       )))
  
- (define-trace (testa x y) (* x y))
- (testa 3 4)

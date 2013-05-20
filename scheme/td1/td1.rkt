@@ -120,9 +120,8 @@
   (syntax-rules ()
     ((while cond body ...) 
        (let loop ()
-         (if cond
-             (begin body ... (loop))
-             (void))
+         (when cond
+             (begin body ... (loop)))
          ))))
        
 ;;;; Test while

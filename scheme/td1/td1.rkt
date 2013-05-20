@@ -137,3 +137,16 @@
         )
       )))
  
+ ;; With this tracing, we can have the trace at the end of the procedure, but the procedure won't return the value we expected
+ (define-syntax define-trace2
+   (syntax-rules ()
+     ((define-trace2 (f . args) body ...)
+      (define (f . args)
+       (let ((result body ...))
+         (display f) (newline)
+         (display result)
+         (newline) (display f))
+       )
+      )))
+
+ 

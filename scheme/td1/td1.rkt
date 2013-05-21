@@ -154,19 +154,7 @@
        )
       )))
  
- 
- ;; Version qui n'est pas du tout ce qui est attendu, juste un squelette pour voir l'ordre d'exécution
- (define-syntax contract
-   (syntax-rules ()
-     ((contract (pre expr1) (post expr2) (inv expr3) body ...)
-      (if (expr1)
-          (contract (post expr2) (inv expr3) body ...)
-          (error "Precondition fausse"))
-      (_ (post expr2) (inv expr3) body ...)
-      (if (expr3)
-          (contract (post expr2) body ...)
-          (error "Invariantes fausses"))
-      (_ (post expr2) body ...)
-      (begin0 body ... (contract (post expr2)))
-)))
+ (define-syntax (contract stx)
+   (syntax-case stx ()
+     ((contract (pre expr1) (post expr2) (inv expr3) body ...))))
       

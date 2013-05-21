@@ -124,9 +124,14 @@
              (begin body ... (loop)))
          ))))
        
-;;;; Test while
+;;;; Test mise en jambe
 
  (test (let ((i 0) (c 0)) (while (< i 5) (set! c (+ c i)) (set! i (+ i 1))) c) 10)
+ (test
+ (let ((x 1))
+   (+ (or (begin (set! x (+ 1 x)) x)) x) 4)
+ 4)
+(test (and 1 2 3) 3)
  
  (define-syntax define-trace
    (syntax-rules ()

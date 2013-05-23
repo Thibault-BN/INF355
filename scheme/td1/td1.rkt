@@ -156,5 +156,12 @@
  
  (define-syntax (contract stx)
    (syntax-case stx ()
-     ((contract (pre expr1) (post expr2) (inv expr3) body ...))))
+     ((contract body ...)
+      (let ((pre (datum->syntax stx 'pre))
+            (post (datum->syntax stx 'post))
+            (inv (datum->syntax stx 'inv)))
+        (define (checkcond expr)
+          (unless expr
+           (error "One of the contract conditions is not fulfilled")))
+        ))))
       

@@ -163,5 +163,21 @@
         (define (checkcond expr)
           (unless expr
            (error "One of the contract conditions is not fulfilled")))
+        (define-syntax pre
+          (syntax-rules ()
+            ((pre expr) (checkcond expr))))
+        (define-syntax post
+          (syntax-rules ()
+            ((post expr) (void))
+            ;Do not check now but put condition in a list to check after
+            ))
+        (define-syntax inv
+          (syntax-rules ()
+            ((inv expr) (checkcond expr)
+                        ;Add again the condition to the list
+                        )))
+        #`(body ...
+           ;Do not forget to test post conditions
+           )
         ))))
       

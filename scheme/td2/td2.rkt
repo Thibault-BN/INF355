@@ -35,3 +35,26 @@
 
 ; Test to check if we don't evaluate all the arguments
 (amb (produce 1) (produce 2) (produce 3))
+
+(reset)
+
+(define (bag-of f)
+  (let ((results '()))
+    (amb
+        (begin (set! results (cons (f) results))
+           (fail))
+        (reverse results))))
+
+(define (check column row head . queue)
+  (let loop ((pair head)
+             (list queue)
+             (col2 (car head))
+             (row2 (cdr head)))
+    (cond 
+      ((equal? column col2) (amb))
+      ((equal? row row2) (amb))
+      ((equal? (- column row) (- col2 row2)) (amb))
+      ((equal? (+ column row) (+ col2 row2)) (amb)))
+    (unless (empty? list)
+      (loop (car list) (cdr list)))))
+  

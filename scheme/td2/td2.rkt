@@ -13,4 +13,5 @@
                       (set! fail old-fail)
                       (k (lambda () y))))
          (lambda () x))))
+    ((amb x y ...) (amb x (amb y ...)))
     ))

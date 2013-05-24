@@ -57,4 +57,10 @@
       ((equal? (+ column row) (+ col2 row2)) (amb)))
     (unless (empty? list)
       (loop (car list) (cdr list)))))
+
+(define (queens)
+  (let loop ((placed '())
+             (column (amb 1 2 3 4 5 6 7 8)))
+    (void)
+    ))
   

@@ -1,6 +1,11 @@
 #lang racket
 
-(define (fail) (error "No more alternatives"))
+(define fail #f)
+
+(define (reset)
+  (set! fail (lambda () (error "No more alternative"))))
+
+(reset)
 
 (define-syntax amb
   (syntax-rules ()
@@ -16,10 +21,6 @@
     ((amb x y ...) (amb x (amb y ...)))
     ))
 
-; Function to help compiler understand that fail is not a constant
-(define (foobar)
-  (amb 1 2))
-
 (define (mult)
   (let ((x (amb 1 2 3 4 5 6 7 8 9 10))
         (y (amb 1 2 3 4 5 6 7 8 9 10)))
@@ -29,6 +30,8 @@
 (define (produce n)
   (printf "Producing ~s~n" n)
   n)
+
+(reset)
 
 ; Test to check if we don't evaluate all the arguments
 (amb (produce 1) (produce 2) (produce 3))

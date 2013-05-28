@@ -14,3 +14,7 @@ parseOp "drop" = \s -> tail s
 parseOp "depth" = \s -> [length s] ++ s
 parseOp "pick" = \s -> [s !! (head s + 1)] ++ tail s
 parseOp x = \s -> [(read x) :: Int] ++ s
+
+eval :: Stack -> [Operator] -> Stack
+eval s [] = s
+eval s (x : xs) = eval (x s) xs

@@ -11,6 +11,7 @@ instance Num Peano where
   
   a - Zero = a
   --case needed for mul div test
+  --This will happen when there is no rest
   Zero - b = b
   Succ a - Succ b = (a - b)
   

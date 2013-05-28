@@ -54,7 +54,7 @@ prop_from_integer i = i >= 0 ==> Succ (fromInteger i) == fromInteger (i+1)
 
 main = do
         quickCheck prop_showread
-        quickCheck prop_showread_noparen
+        --quickCheck prop_showread_noparen
         quickCheck prop_eq
         quickCheck prop_neq
         quickCheck prop_gt

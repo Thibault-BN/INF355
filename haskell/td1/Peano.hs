@@ -1,6 +1,6 @@
 module Peano where
 
-data Peano = Zero | Succ Peano deriving (Show, Eq)
+data Peano = Zero | Succ Peano deriving (Eq)
 
 instance Num Peano where
   a + Zero = a
@@ -19,3 +19,8 @@ instance Num Peano where
   
   signum Zero = 0
   signum _ = 1
+  
+instance Show Peano where
+  show Zero = "Zero"
+  show (Succ Zero) = "Succ Zero"
+  show (Succ a) = "Succ (" ++ (show a) ++ ")"

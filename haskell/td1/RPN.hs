@@ -33,7 +33,7 @@ repl stack = do
   newstack <- return $ eval stack (parse line)
   putStrLn $ show $ reverse newstack
   repl newstack
-main = repl []
+--main = repl []
 
 
   

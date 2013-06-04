@@ -52,3 +52,18 @@ pair = do
   x <- dice
   y <- dice
   return $ x + y
+  
+sick = Prob [(True, 1%100000), (False, 99999%100000)] 
+
+positive :: Bool -> Prob Bool
+positive True = Prob [(True, 999%1000), (False, 1%1000)]
+positive False = Prob [(True, 1%1000), (False, 999%1000)]
+
+renormalize :: Prob a -> Prob a
+renormalize (Prob l) = Prob [(a, r / (sumProb l)) | (a, r) <- l]
+
+results :: Prob Bool
+results = do
+  x <- sick
+  y <- positive x
+  return $ x && y

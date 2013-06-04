@@ -1,6 +1,7 @@
 module Td2 where 
 
 import Data.Ratio
+import Data.List
 
 data Prob a = Prob { getList :: [(a, Rational)]} deriving (Show)
 
@@ -17,4 +18,20 @@ instance Functor Prob where
 instance Monad Prob where
   return x = Prob [(x, 1)]
   Prob [] >>= _ = Prob []
-  Prob [(a,r)] >>= f = Prob [(x, y * r) | (x, y) <- (getList (f a))]
+  Prob (x : xs) >>= f = Prob [(a, r * (snd x)) | (a, r) <- (getList (f $ fst x))] `conc` ((Prob xs) >>= f)
+  fail = const $ Prob []
+  
+predic :: Eq a => (a, Rational) -> (a, Rational) -> Bool
+predic x = (\y -> fst x == fst y)   
+
+sumProb :: [(a, Rational)] -> Rational
+sumProb [] = 0
+sumProb (x : xs) = snd x + sumProb xs 
+
+canonize :: Eq a => Prob a -> Prob a
+canonize (Prob []) = Prob []
+canonize (Prob l) = let (eq, noneq) = partition (predic $ head l) l
+                    in Prob [(fst $ head $ eq, sumProb eq)] `conc` canonize (Prob noneq)
+                      
+
+  

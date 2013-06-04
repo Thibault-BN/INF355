@@ -33,5 +33,22 @@ canonize (Prob []) = Prob []
 canonize (Prob l) = let (eq, noneq) = partition (predic $ head l) l
                     in Prob [(fst $ head $ eq, sumProb eq)] `conc` canonize (Prob noneq)
                       
+probability :: Eq a => a -> Prob a -> Rational
+probability x (Prob l) = let res = lookup x $ getList (canonize $ Prob l)
+                         in case res of
+                           Nothing -> 0
+                           Just y -> y
+                           
+dice = sameProbability [1 .. 6]
 
+double :: Prob Bool
+double = do
+  x <- dice
+  y <- dice
+  return $ x == y
   
+pair :: Prob Int
+pair = do
+  x <- dice
+  y <- dice
+  return $ x + y

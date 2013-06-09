@@ -63,7 +63,8 @@ renormalize :: Prob a -> Prob a
 renormalize (Prob l) = Prob [(a, r / (sumProb l)) | (a, r) <- l]
 
 results :: Prob Bool
-results = do
+results = renormalize $ do
   x <- sick
   y <- positive x
-  return $ x && y
+  if y then return x
+       else fail ""

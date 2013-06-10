@@ -8,9 +8,7 @@ IN: engramme
                            [ group-factors [ last first primes-upto ] keep [ at 0 or ] curry map [ >engramme ] map concat "(" ")" surround ] 
                          } cond ;
 
-: power ( a b -- n ) dup 0 = [ drop drop 0 ] [ (pow) ] if ;
-
-M: sequence >integer dup length 1 = [ first 2 swap power ] [ dup length nprimes swap [ power ] 2map sum ] if ;
+M: sequence >integer dup length 1 = [ first 2 swap (pow) ] [ dup length nprimes swap [ (pow) ] 2map product ] if ;
 
 EBNF: parse-engramme
 rule0 = "0" => [[ 0 ]]
@@ -19,4 +17,6 @@ rulec = "("~ parse-engramme+ => [[ >integer ]] ")"~
 parse-engramme = rule0 | rule1 | rulec
 ;EBNF
 
-M: string >integer parse-engramme ;
+ERROR: malformed ;
+
+M: string >integer [ parse-engramme ] [ malformed ] recover ;

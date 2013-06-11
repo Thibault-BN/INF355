@@ -1,0 +1,27 @@
+:q
+println("lad")
+console
+compile
+~compile
+console
+compile
+console
+compile
+console
+compile
+console
+compile
+console
+compile
+console
+~test
+~compile
+console
+~compile
+console
+compile
+console
+~compile
+~console
+~test
+~test-only RationalTest

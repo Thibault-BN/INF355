@@ -1,0 +1,17 @@
+[0m[[0minfo[0m] [0mOptionSpec[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mThe option should[0m
+[0m[[0minfo[0m] [0m[32m+[0m be able to return an Int[0m
+[0m[[0minfo[0m] [0m[32m+[0m be able to return an Int or a String[0m
+[0m[[0minfo[0m] [0m[32m+[0m be able to return the default[0m
+[0m[[0minfo[0m] [0m[32m+[0m have no side effect[0m
+[0m[[0minfo[0m] [0m [0m
+[0m[[0minfo[0m] [0misEmpty should[0m
+[0m[[0minfo[0m] [0m[32m+[0m be true for None[0m
+[0m[[0minfo[0m] [0m[32m+[0m be false for Some[0m
+[0m[[0minfo[0m] [0m [0m
+[0m[[0minfo[0m] [0m [0m
+[0m[[0minfo[0m] [0mTotal for specification OptionSpec[0m
+[0m[[0minfo[0m] [0m[34mFinished in 20 ms[0m[0m
+[0m[[0minfo[0m] [0m[34m6 examples, 0 failure, 0 error[0m[0m
+[0m[[0minfo[0m] [0m[0m

@@ -1,0 +1,16 @@
+package fr.enst.plnc2013
+
+abstract class Option[+A] {
+   def isEmpty: Boolean
+   def get: A
+}
+
+class Some[+A](x: A) extends Option[A] {
+   override def isEmpty = false
+   val get = x
+   override val toString = "Some(" + x + ")"
+}
+
+object Some {
+   def apply[A](x: A) = new Some(x)
+}

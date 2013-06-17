@@ -2,10 +2,10 @@ import org.scalatest.{Spec,FlatSpec}
 import org.scalatest.matchers._
 
 import fr.enst.plnc2013.td1.TD1._
-// import net.rfc1149.td1.ExtSeq._
+import fr.enst.plnc2013.td1.ExtSeq._
 // import net.rfc1149.td1.Complex
 // import net.rfc1149.td1.Complex._
-// import net.rfc1149.td1.ExtCond._
+import fr.enst.plnc2013.td1.ExtCond._
 
 class Tests extends Spec with ShouldMatchers {
 
@@ -23,75 +23,75 @@ class Tests extends Spec with ShouldMatchers {
 
   }
 
-//   describe("any") {
-//
-//     it ("should work with an empty list") {
-//       Nil.any(_ => true) should be (false)
-//     }
-//
-//     it ("should identify an odd number") {
-//       List(1, 2, 3).any(isOdd) should be (true)
-//     }
-//
-//     it ("should not identify even numbers") {
-//       List(2, 4, 6).any(isOdd) should be (false)
-//     }
-//
-//   }
-//
-//   describe ("all") {
-//
-//     it ("should work with an empty list") {
-//       Nil.all(_ => false) should be (true)
-//     }
-//
-//     it ("should work with all even numbers") {
-//       List(2, 4, 6).all(isEven) should be (true)
-//     }
-//
-//     it ("should fail with an odd number in the list") {
-//       List(2, 4, 5, 6).all(isEven) should be (false)
-//     }
-//
-//   }
-//
-//   describe("myWhile") {
-//
-//     it("should not evaluate actions when false") {
-//       var c = 0
-//       myWhile(false, c += 1)
-//       c should equal (0)
-//     }
-//
-//     it("should not evaluate action several times") {
-//       var c = 0
-//       myWhile({c += 1; false}, c += 10)
-//       c should equal (1)
-//     }
-//
-//     it("should evaluate actions while true") {
-//       var c = 0
-//       var x = 0
-//       myWhile(x < 4, { c += x; x+= 1 })
-//       c should equal (6)
-//     }
-//
-//   }
-//
-//   describe("doWhile") {
-//
-//     it ("should work with an automatic conversion") {
-//       var x = 0
-//       var c = 0
-//       (x < 4) doWhile {
-// 	c += x
-// 	x += 1
-//       }
-//       c should equal(6)
-//     }
-//
-//   }
-//
+  describe("any") {
+
+    it ("should work with an empty list") {
+      Nil.any(_ => true) should be (false)
+    }
+
+    it ("should identify an odd number") {
+      List(1, 2, 3).any(isOdd) should be (true)
+    }
+
+    it ("should not identify even numbers") {
+      List(2, 4, 6).any(isOdd) should be (false)
+    }
+
+  }
+
+  describe ("all") {
+
+    it ("should work with an empty list") {
+      Nil.all(_ => false) should be (true)
+    }
+
+    it ("should work with all even numbers") {
+      List(2, 4, 6).all(isEven) should be (true)
+    }
+
+    it ("should fail with an odd number in the list") {
+      List(2, 4, 5, 6).all(isEven) should be (false)
+    }
+
+  }
+
+  describe("myWhile") {
+
+    it("should not evaluate actions when false") {
+      var c = 0
+      myWhile(false, c += 1)
+      c should equal (0)
+    }
+
+    it("should not evaluate action several times") {
+      var c = 0
+      myWhile({c += 1; false}, c += 10)
+      c should equal (1)
+    }
+
+    it("should evaluate actions while true") {
+      var c = 0
+      var x = 0
+      myWhile(x < 4, { c += x; x+= 1 })
+      c should equal (6)
+    }
+
+  }
+
+  describe("doWhile") {
+
+    it ("should work with an automatic conversion") {
+      var x = 0
+      var c = 0
+      (x < 4) doWhile {
+	c += x
+	x += 1
+      }
+      c should equal(6)
+    }
+
+  }
+
 //   describe("a Complex") {
 //
 //     it ("should print properly") {
